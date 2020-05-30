@@ -1,5 +1,7 @@
 # Microbolt
 
+This is an idea of slack bot created using [boltjs](https://slack.dev/bolt-js) that reacts to slack actions but fetches data from external microservices/APIs.
+
 ## Set up
 
 You need to fill `.env` file with proper data. You will obtain all those keys from page of your app ([your slack apps](https://api.slack.com/apps)).
