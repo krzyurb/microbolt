@@ -3,10 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "test": "yarn jest"
+  },
   "dependencies": {
     "@slack/bolt": "^2.1.1",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1"
   }
 }

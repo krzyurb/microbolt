@@ -1,19 +1,24 @@
 const { sendAuthorizedRequest, sendRequest } = require("./requester");
 
-const DEFAULT_OPT = {
-  sendAuthorizedRequest,
-  sendRequest,
+const DEFAULT_OPTIONS = {
   debug: false,
 };
 
-module.exports.reaction = (fn, opt) => {
-  const options = { ...DEFAULT_OPT, ...opt };
+const DEFAULT_DEPENDENCIES = {
+  sendAuthorizedRequest,
+  sendRequest,
+};
 
-  return (args) => {
-    if (options.debug) {
+module.exports.reaction = (fn, options) => {
+  const opt = { ...DEFAULT_OPTIONS, ...options };
+
+  return (args, dependencies) => {
+    const dep = { ...DEFAULT_DEPENDENCIES, ...dependencies };
+
+    if (opt.debug) {
       console.debug(args.body);
     }
 
-    fn({ ...args, ...options });
+    return fn({ ...args, ...dep, ...opt });
   };
 };

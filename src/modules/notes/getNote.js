@@ -11,6 +11,6 @@ module.exports.getNoteReaction = reaction(
       url: `todos/${noteId}`,
     });
 
-    await say(result.title);
+    return say(result.title);
   }
 );
