@@ -1,5 +1,7 @@
 const { App } = require("@slack/bolt");
+
 const { buildConfig } = require("./config");
+const { errorHandler } = require("./middlewares");
 
 class Bot {
   constructor(config = buildConfig()) {
@@ -8,6 +10,12 @@ class Bot {
       token: config.SLACK_BOT_TOKEN,
       signingSecret: config.SLACK_SIGNING_SECRET,
     });
+
+    this._setMiddlewares();
+  }
+
+  _setMiddlewares() {
+    this.bolt.error(errorHandler);
   }
 
   module(registerModule) {
