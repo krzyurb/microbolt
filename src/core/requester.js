@@ -1,5 +1,6 @@
 const axios = require("axios");
-const _ = require("lodash");
+
+const buildBotHeader = (auth) => (auth ? { "X-Bot-Auth": "XXX" } : {});
 
 /**
  * Fetch URL of service from process.env
@@ -12,28 +13,22 @@ function getService(serviceName) {
   return result;
 }
 
-async function sendRequest({
+module.exports.sendRequest = async ({
   service,
   url,
   method = "GET",
   data,
   headers,
   params,
-}) {
+  auth = false,
+}) => {
   const response = await axios({
     url: [getService(service), url].join("/"),
     method,
     data,
-    headers,
+    headers: { ...headers, ...buildBotHeader(auth) },
     params,
   });
 
   return response.data;
-}
-
-async function sendAuthorizedRequest(args) {
-  const authHeader = { headers: { Authorization: "XXX" } };
-  return sendRequest(_.merge(args, authHeader));
-}
-
-module.exports = { sendRequest, sendAuthorizedRequest };
+};
