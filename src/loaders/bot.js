@@ -1,7 +1,7 @@
 const { App } = require("@slack/bolt");
 
 const { buildConfig } = require("./config");
-const { errorHandler } = require("./middlewares");
+const { errorHandler } = require("../middlewares");
 
 class Bot {
   constructor(config = buildConfig()) {
